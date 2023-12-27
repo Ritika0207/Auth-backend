@@ -1,18 +1,18 @@
-import { User } from "../models/userModel.js"
-import Jwt  from "jsonwebtoken"
- 
- 
- const isAuthenticated =async (req,res,next) =>{
-    const {token} = req.cookies
+import { User } from "../models/userModel.js";
+import Jwt from "jsonwebtoken";
 
-    if(!token) return res.status(404).json({
-        success : false,
-        message : "Login first"
-    })
+const isAuthenticated = async (req, res, next) => {
+  const { token } = req.cookies;
 
-    const decoded = Jwt.verify(token, process.env.JWT_SECRET)
-     req.user = await User.findById(decoded._id)
-     next()
-}
+  if (!token)
+    return res.status(404).json({
+      success: false,
+      message: "Login first",
+    });
 
-export default isAuthenticated
+  const decoded = Jwt.verify(token, process.env.JWT_SECRET);
+  req.user = await User.findById(decoded._id);
+  next();
+};
+
+export default isAuthenticated;
