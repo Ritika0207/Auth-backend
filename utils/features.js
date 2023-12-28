@@ -14,6 +14,6 @@ export const sendCookies = (user, res, message, statusCode = 200) => {
     .json({
       status: true,
       message,
-      user
+      user 
     });
 };
